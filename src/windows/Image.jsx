@@ -4,7 +4,7 @@ import useWindowStore from "#store/windows";
 
 const ImageWindowContent = () => {
     const { windows } = useWindowStore();
-    const data = windows.imagefile?.data;
+    const data = windows.imgfile?.data;
 
     if (!data) return null;
 
@@ -28,6 +28,6 @@ const ImageWindowContent = () => {
     )
 }
 
-const ImageWindow = WindowWrapper(ImageWindowContent, "imagefile");
+const ImageWindow = WindowWrapper(ImageWindowContent, "imgfile");
 
 export default ImageWindow;
