@@ -14,8 +14,8 @@ const Contact = () => {
             <div className="p-5 space-y-5">
                 <img src="/images/nishanth.jpg" alt="Nishanth" className="w-20 h-20 object-cover rounded-full" />
                 <h3>Let's Connect</h3>
-                <p>Got an idea? A bug to squash? or wanna have some tech talk ? I'm in.</p>
-                <p>nishanthtamil72@gmail.com</p>
+                <p className="dark:text-gray-300">Got an idea? A bug to squash? or wanna have some tech talk ? I'm in.</p>
+                <p className="dark:text-gray-300">nishanthtamil72@gmail.com</p>
 
                 <ul>
                     {socials.map(({ id, bg, link, icon, text }) => (
