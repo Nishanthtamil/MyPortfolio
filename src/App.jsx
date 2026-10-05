@@ -1,27 +1,10 @@
-import { Dock, Home, Navbar, Welcome } from "#components";
-import { Finder, Resume, Safari, Terminal, Text, Image, Contact } from "#windows";
-import gsap from "gsap";
-
-import { Draggable } from "gsap/Draggable";
-gsap.registerPlugin(Draggable);
+import { useIsMobile } from '#hooks/useIsMobile.js';
+import DesktopApp from './DesktopApp.jsx';
+import MobileApp from '#mobile/MobileApp.jsx';
 
 const App = () => {
-  return (
-    <main>
-      <Navbar />
-      <Welcome/>
-      <Dock/>
-
-      <Terminal/>
-      <Safari/>
-      <Resume/>
-      <Finder/>
-      <Text/>
-      <Image />
-      <Contact/>
-      <Home />
-    </main>
-  );
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileApp /> : <DesktopApp />;
 };
 
-export default App
+export default App;

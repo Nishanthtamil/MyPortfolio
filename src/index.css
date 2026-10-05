@@ -7,16 +7,26 @@ body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
-  background-image: url("/images/wallpaper.png?v=new");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: transparent;
 }
 
 @theme {
   --font-georama: "Georama", sans-serif;
   --font-roboto: "Roboto Mono", monospace;
   --breakpoint-3xl: 1920px;
+  
+  /* NEW: iOS Design Tokens */
+  --color-ios-blue: #007AFF;
+  --color-ios-green: #34C759;
+  --color-ios-red: #FF3B30;
+  --color-ios-orange: #FF9500;
+  --color-ios-gray: #8E8E93;
+  --color-ios-separator: rgba(60, 60, 67, 0.29);
+  --color-ios-bg: #F2F2F7;
+  --color-ios-card: #FFFFFF;
+  --color-ios-dark-bg: #000000;
+  --color-ios-dark-card: #1C1C1E;
+  --color-ios-dark-separator: rgba(84, 84, 88, 0.65);
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -132,7 +142,7 @@ body {
     }
 
     .blog {
-      @apply bg-white dark:bg-gray-900 p-10 max-w-3xl mx-auto transition-colors;
+      @apply bg-white dark:bg-gray-900 p-10 max-w-3xl mx-auto transition-colors h-full overflow-y-auto pb-20;
 
       h2 {
         @apply text-xl font-bold text-pink-600 mb-10;
@@ -314,7 +324,7 @@ body {
     @apply absolute w-[60rem] h-[35rem] left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl bg-white dark:bg-gray-900 transition-colors;
 
     .sidebar {
-      @apply w-48 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col p-5 space-y-3 transition-colors;
+      @apply w-48 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col p-5 space-y-3 transition-colors overflow-y-auto;
 
       h3 {
         @apply text-xs font-medium text-gray-400 mb-1;
@@ -338,10 +348,10 @@ body {
     }
 
     .content {
-      @apply flex-1 p-8 bg-white dark:bg-gray-900 max-w-2xl relative transition-colors;
+      @apply flex-1 p-8 bg-white dark:bg-gray-900 max-w-2xl transition-colors flex flex-wrap gap-10 overflow-y-auto content-start;
 
       li {
-        @apply absolute flex items-center flex-col gap-3;
+        @apply flex items-center flex-col gap-3 cursor-pointer;
 
         img {
           @apply object-contain object-center size-16 relative group-hover:scale-105;
