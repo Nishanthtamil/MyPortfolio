@@ -4,6 +4,6 @@ import Dock from "#components/Dock.jsx";
 import WindowControlls from "#components/WindowControlls.jsx";
 import Home from "#components/Home.jsx";
 import ThreeBackground from "#components/ThreeBackground.jsx";
+import DesktopSettingsPanel from "#components/DesktopSettingsPanel.jsx";
 
-
-export { Navbar, Welcome, Dock, WindowControlls, Home, ThreeBackground };
+export { Navbar, Welcome, Dock, WindowControlls, Home, ThreeBackground, DesktopSettingsPanel };
