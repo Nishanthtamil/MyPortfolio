@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export const WALLPAPERS = ["aurora", "midnight", "sunset", "ocean", "forest", "galaxy"];
+// export const WALLPAPERS = ["aurora", "midnight", "sunset", "ocean", "forest", "galaxy"];
 
 export const ACCENT_COLORS = {
     blue: "#3b82f6",
@@ -11,6 +11,15 @@ export const ACCENT_COLORS = {
     green: "#22c55e",
     red: "#ef4444",
 };
+
+export const WALLPAPER_OPTIONS = [
+    { id: "aurora", label: "Aurora", gradient: null }, // null = ThreeBackground
+    { id: "midnight", label: "Midnight", gradient: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)" },
+    { id: "sunset", label: "Sunset", gradient: "linear-gradient(135deg, #f093fb, #f5576c, #fda085)" },
+    { id: "ocean", label: "Ocean", gradient: "linear-gradient(135deg, #667eea, #764ba2, #00d2ff)" },
+    { id: "forest", label: "Forest", gradient: "linear-gradient(135deg, #134e5e, #71b280, #1a1a2e)" },
+    { id: "galaxy", label: "Galaxy", gradient: "linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #533483)" },
+];
 
 const useDesktopSettings = create(
     persist(

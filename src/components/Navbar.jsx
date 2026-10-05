@@ -1,23 +1,19 @@
 import dayjs from "dayjs";
+import { Settings } from "lucide-react";
 import { navLinks, navIcons } from "#constants/index.js";
 import useWindowStore from "#store/windows.js";
-import { useState, useEffect } from "react";
+import useThemeStore from "#store/themeStore.js";
+import useDesktopSettings from "#store/desktopSettings.js";
+import { useEffect } from "react";
 
 const Navbar = () => {
     const { openWindow } = useWindowStore();
-    const [theme, setTheme] = useState('light');
+    const { theme, toggleTheme, initTheme } = useThemeStore();
+    const togglePanel = useDesktopSettings((s) => s.togglePanel);
 
     useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(prev => prev === 'light' ? 'dark' : 'light');
-    };
+        initTheme();
+    }, [initTheme]);
 
     return (
         <nav>
@@ -36,7 +32,6 @@ const Navbar = () => {
 
             <div>
                 <ul className="flex items-center gap-2">
-                    {/* Theme Toggle Button */}
                     <li className="flex items-center">
                         <button
                             onClick={toggleTheme}
@@ -49,6 +44,18 @@ const Navbar = () => {
                         </button>
                     </li>
 
+                    {/* Desktop settings gear */}
+                    <li className="flex items-center">
+                        <button
+                            type="button"
+                            onClick={togglePanel}
+                            aria-label="Desktop settings"
+                            className="text-black dark:text-white icon-hover"
+                        >
+                            <Settings size={16} />
+                        </button>
+                    </li>
+
                     {navIcons.map(({ id, img }) => (
                         <li key={id}>
                             <img src={img} className="icon-hover dark:invert transition-all" alt={`icon-${id}`} />
@@ -58,7 +65,7 @@ const Navbar = () => {
                 <time>{dayjs().format("ddd MMM D h:mm A")}</time>
             </div>
         </nav>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

@@ -408,3 +408,58 @@ body {
     }
   }
 }
+
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+  transition-duration: 0s !important;
+  animation: none !important;
+}
+
+/* ---------- Desktop settings: window opacity ---------- */
+#safari,
+#terminal,
+#contact,
+#photos,
+#resume,
+#finder,
+#txtfile,
+#imgfile {
+  opacity: var(--window-opacity, 1);
+}
+
+/* ---------- Desktop settings: accent color ---------- */
+/* Finder sidebar active item */
+#finder .sidebar ul .active,
+/* Photos sidebar first item */
+#photos .sidebar ul li:first-child {
+  background-color: color-mix(in srgb, var(--accent, #3b82f6) 25%, transparent);
+  color: var(--accent, #3b82f6);
+}
+
+/* Safari blog heading (was hard-coded pink) */
+#safari .blog h2 {
+  color: var(--accent, #3b82f6);
+}
+
+/* Blog links */
+#safari .blog .blog-post .content a {
+  color: var(--accent, #3b82f6);
+}
+
+/* Desktop icon label highlight on hover (was blue-500) */
+#home ul li:hover p {
+  background-color: var(--accent, #3b82f6);
+}
+
+/* Dock tooltip */
+#dock .tooltip {
+  background-color: color-mix(in srgb, var(--accent, #3b82f6) 25%, white) !important;
+  color: #111 !important;
+}
+
+/* Small polish: yellow and green buttons weren't showing a pointer */
+#window-controls .minimize,
+#window-controls .maximize {
+  cursor: pointer;
+}
