@@ -5,7 +5,7 @@ import { Draggable } from 'gsap/Draggable';
 import useLocationStore from '#store/location.js'
 import useWindowStore from '#store/windows.js'
 
-const projects = locations.work?.children ?? [];
+const projects = (locations.work?.children ?? []).filter(p => [8, 12, 20].includes(p.id));
 
 const Home = () => {
     const { setActiveLocation } = useLocationStore();
