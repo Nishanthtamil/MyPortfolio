@@ -1,25 +1,37 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-const useThemeStore = create((set) => ({
-  theme: 'dark', // Let's default to dark if the user prefers dark interfaces
-  initTheme: () => {
-    // If the HTML already has dark class from desktop, sync it. Otherwise, set it.
-    if (document.documentElement.classList.contains('dark')) {
-      set({ theme: 'dark' });
-    } else {
-      document.documentElement.classList.add('dark');
-      set({ theme: 'dark' });
+const applyTheme = (theme) => {
+  document.documentElement.classList.toggle('dark', theme === 'dark');
+};
+
+const useThemeStore = create(
+  persist(
+    (set, get) => ({
+      theme: 'dark', // default on first visit only
+
+      // Applies the CURRENT theme. Never overwrites it.
+      initTheme: () => applyTheme(get().theme),
+
+      setTheme: (theme) => {
+        applyTheme(theme);
+        set({ theme });
+      },
+
+      toggleTheme: () => {
+        const next = get().theme === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        set({ theme: next });
+      },
+    }),
+    {
+      name: 'theme-storage', // localStorage key
+      // Re-apply the saved theme as soon as it's loaded from storage
+      onRehydrateStorage: () => (state) => {
+        if (state) applyTheme(state.theme);
+      },
     }
-  },
-  toggleTheme: () => set((state) => {
-    const newTheme = state.theme === 'light' ? 'dark' : 'light';
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    return { theme: newTheme };
-  }),
-}));
+  )
+);
 
 export default useThemeStore;

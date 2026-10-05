@@ -80,6 +80,7 @@ const HomeScreen = () => {
             onClick={handleAppClick}
             badge={badgeMap[app.id]}
             sizeClass={iconSizeClass}
+            invert={app.id === 'settings'}
           />
         ))}
       </div>
