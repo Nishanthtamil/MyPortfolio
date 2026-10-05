@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IOSAppIcon = ({ id, name, icon, onClick, disabled, badge, sizeClass }) => {
+const IOSAppIcon = ({ id, name, icon, onClick, disabled, badge, sizeClass, invert }) => {
   // Handle paths for both /images/ and /icons/
   const imgSrc = icon.startsWith('/') || icon.startsWith('.') ? icon : `/images/${icon}`;
   const sz = sizeClass || 'w-[60px] h-[60px]';
@@ -12,11 +12,25 @@ const IOSAppIcon = ({ id, name, icon, onClick, disabled, badge, sizeClass }) => 
       onClick={() => !disabled && onClick(id)}
     >
       <div className="relative">
-        <img
-          src={imgSrc}
-          alt={name || id}
-          className={`${sz} rounded-[13.5px] shadow-md object-cover`}
-        />
+        {invert ? (
+          // Glyph-style icon (dark SVG): white glyph on a gray tile
+          <div
+            className={`${sz} rounded-[13.5px] shadow-md flex items-center justify-center bg-gradient-to-b from-gray-500 to-gray-700`}
+          >
+            <img
+              src={imgSrc}
+              alt={name || id}
+              className="w-[60%] h-[60%] object-contain invert"
+            />
+          </div>
+        ) : (
+          <img
+            src={imgSrc}
+            alt={name || id}
+            className={`${sz} rounded-[13.5px] shadow-md object-cover`}
+          />
+        )}
+
         {/* Badge */}
         {badge && (
           <div
@@ -28,9 +42,12 @@ const IOSAppIcon = ({ id, name, icon, onClick, disabled, badge, sizeClass }) => 
           </div>
         )}
       </div>
+
       {name && (
-        <span className="text-[11px] text-white text-center font-medium block mt-1 leading-tight max-w-[68px] truncate"
-          style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
+        <span
+          className="text-[11px] text-white text-center font-medium block mt-1 leading-tight max-w-[68px] truncate"
+          style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+        >
           {name}
         </span>
       )}
